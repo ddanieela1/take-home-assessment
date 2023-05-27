@@ -3,14 +3,17 @@ import React from 'react'
 import NumberField from './fields/NumberField'
 import TextField from './fields/TextField'
 import ChoiceField from './fields/ChoiceField'
-import { QuestionProps } from '../types'
 import BooleanField from './fields/BooleanField'
+import PercentageField from './fields/PercentageField'
+import { QuestionProps } from '../types'
 
 function Question({
   question, onChange,
 }: QuestionProps) {
   const renderField = (type: string) => {
     switch (type) {
+      case 'percentage':
+        return <PercentageField name={question.id.toString()} onChange={onChange} />
       case 'text':
         return <TextField name={question.id.toString()} onChange={onChange} />
       case 'number':
