@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {
+  useCallback, useEffect, useState, useRef,
+} from 'react'
 
 import questions from './questions.json'
 import Button from './components/Button'
@@ -12,6 +14,7 @@ function App() {
   const [data, setData] = useState({})
   const [status, setStatus] = useState({ state: '', lastSaved: new Date() })
   const [modal, setModal] = useState<string|null>(null)
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const hideModal = () => {
     document.body.style.overflow = 'auto'
@@ -23,18 +26,23 @@ function App() {
     setModal(newModal)
   }
 
-  const save = () => {
+  const save = useCallback(() => {
     if (Object.keys(data).length > 0) {
       setStatus({ ...status, state: 'working' })
-      setTimeout(() => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current)
+      }
+      debounceTimeoutRef.current = setTimeout(() => {
         setStatus({ state: 'saved', lastSaved: new Date() })
       }, 1000)
     }
-  }
+  }, [data, status])
 
-  useEffect(() => {
-    save()
-  }, [data])
+  useEffect(() => () => {
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current)
+    }
+  }, [])
 
   const renderStatus = () => {
     switch (status.state) {
@@ -78,7 +86,10 @@ function App() {
             { questions[index].modals && <Button variant="outline" onClick={() => showModal('description')}>Modal</Button> }
 
             <span className="flex-1 text-right">{ renderStatus() }</span>
-            <Button>Save and Exit</Button>
+            <Button
+              onClick={save}
+            >Save and Exit
+            </Button>
             <Button
               onClick={() => { setIndex(index + 1) }}
               disabled={index >= questions.length - 1}
@@ -100,10 +111,10 @@ function App() {
         </div>
       ) }
 
-      <div>
+      { /* <div>
         <pre>question = { JSON.stringify(question, null, 2) }</pre>
         <pre>data = { JSON.stringify(data, null, 2) }</pre>
-      </div>
+      </div> */ }
     </>
   )
 }
