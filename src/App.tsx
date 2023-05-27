@@ -111,10 +111,6 @@ function App() {
         </div>
       ) }
 
-      { /* <div>
-        <pre>question = { JSON.stringify(question, null, 2) }</pre>
-        <pre>data = { JSON.stringify(data, null, 2) }</pre>
-      </div> */ }
     </>
   )
 }
