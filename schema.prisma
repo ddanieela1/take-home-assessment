@@ -1,3 +1,4 @@
+
 datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
@@ -6,6 +7,46 @@ datasource db {
 generator client {
     provider = "prisma-client-js"
 }
+
+model User {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    email     String   @unique
+    name      String?
+    role      Role     @default(USER)
+    questions Question[]
+    scores    Score[]
+}
+
+model Question {
+    id              Int      @id @default(autoincrement())
+    question        String
+    correctAnswer   String
+    type            String
+    user            User
+    scores          Score[]
+    userId          Int
+    choices         String["choice","boolean","number","text"]
+    createdAt       DateTime @default(now())
+}
+
+model Score {
+    id              Int         @id @default(autoincrement())
+    user            User        @relation(fields: [userId], references: [id])
+    numberCorrect   Int
+    numberIncorrect Int  
+    chosenAnswer    String
+    questionId      Int
+    question        Question    @relation(fields:[questionId] , references: [id])
+    score           Float
+    type            String
+    choices         String["choice","boolean","number","text"]
+    userId          Int
+    createdAt       DateTime    @default(now())
+    updatedAt       DateTime    @updatedAt
+}
+
+
 
 // ==================== EXAMPLES (DELETE BEFORE SUBMITTING) ====================
 model User {
