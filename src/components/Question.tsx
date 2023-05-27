@@ -35,12 +35,13 @@ function Question({
 
   return (
     <div className="max-w-3xl">
-      <h2 className="mb-10 text-3xl font-bold">{ question.title }</h2>
+      <h2 className="question mb-10 text-3xl font-bold">{ question.title }</h2>
       { renderField(question.type) }
+     { renderField(question.choice2) } 
       { question.description && (
         <>
           <p className="mt-10 text-gray-600">{ question.description }</p>
-          <a className="mt-2 block font-medium text-gray-600" href="//atmos.ai" target="_blank" rel="noreferrer">Learn More &rarr;</a>
+          <a className="mt-2 block font-medium text-gray-600" href="//nationalgeographic.org/education/what-is-geography/" target="_blank" rel="noreferrer">Learn More &rarr;</a>
         </>
       ) }
     </div>

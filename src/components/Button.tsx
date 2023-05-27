@@ -25,7 +25,7 @@ function Button({
     <button
       type="button"
       className={classNames(
-        'inline-block rounded-lg py-2 px-4 font-bold transition border-2',
+        'inline-block rounded-lg py-2 px-4 p-5 font-bold transition border-2',
         variantClassNames[variant || 'default'],
         (className || ''),
       )}

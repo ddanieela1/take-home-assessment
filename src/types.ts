@@ -9,6 +9,7 @@ export type Question = {
     [key: string]: string;
   };
   choices?: string[];
+  choice2: string;
 };
 
 export interface QuestionProps {

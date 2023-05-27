@@ -31,5 +31,18 @@
         "Judicial",
         "Financial"
       ]
+  
+    },
+    {
+      "id": 5,
+      "title": "What percentage of people in the state of Vermont own a dog? Pick a choice or write answer below.",
+      "description": "To learn more interesting facts about statistic and geography click below.",
+      "type": "choice",
+      "choices": [
+        "20%",
+        "100%",
+        "73%"
+      ],
+      "choice2":"text"
     }
 ]

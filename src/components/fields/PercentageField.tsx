@@ -14,7 +14,7 @@ function PercentageField({ name, initialValue, onChange }: FieldProps) {
     <input
       type="percentage"
       name={name}
-      className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none"
+      className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none "
       value={value}
       onChange={handleChange}
     />
