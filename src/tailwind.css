@@ -5,3 +5,7 @@
 body {
     @apply antialiased;
 }
+
+.progress-bar {
+    background-color: rgba(0, 155, 255, 0.7);
+}
